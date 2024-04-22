@@ -12,7 +12,12 @@ class Program
             launches
                 .Where(l => l.success == false);
 
-        foreach (Launch launch in launches)
+        IEnumerable<Launch> failures2 =
+            from launch in launches
+            where launch.success == false
+            select launch;
+        
+        foreach (Launch launch in failures2)
         {
             Console.WriteLine($"{launch.name}\t\t{launch.date_utc.Year}\n" +
                               $"{launch.details}\n-----------------------------------");
